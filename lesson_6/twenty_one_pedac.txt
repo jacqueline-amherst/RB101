@@ -1,0 +1,69 @@
+1. Initialize deck
+2. Deal cards to player and dealer
+3. Player turn: hit or stay
+  - repeat until bust or "stay"
+4. If player bust, dealer wins.
+5. Dealer turn: hit or stay
+  - repeat until total >= 17
+6. If dealer bust, player wins.
+7. Compare cards and declare winner.
+
+-------------------------------------
+
+Initialize deck:
+
+- Deck contains 52 cards. Suit doesn't matter.
+  - 4 each: 2, 3, 4, 5, 6, 7, 8, 9, Jack, Queen, King
+- Could be set up as array i.e. [2, 2, 2, 2, 3, 3, 3, 3, etc.]
+- Could be set up as a hash i.e.
+  {2 => 4, 3 => 4, etc.}
+  In this scenario, card value (Jack, 2, Ace, etc) is represented by key, and number of cards left is value.
+  1 is subtracted from the value every time that card is dealt
+  If the value reaches 0:
+    That card type is made unavailable.
+      * the key is deleted?
+  
+---------------------------------------
+
+Initial Deal: 
+
+- requires 'deal_card' method
+- requires 'player_hand' and 'dealer_hand' variables
+  - these should both be arrays
+
+- do this twice:
+  - deal card to player
+  - deal card to dealer
+
+----------------------------------------
+
+Method: Deal Card:
+(hand, deck)
+
+- choose a random card
+- delete that card from deck
+- add that card to hand
+
+------------------------------------------
+
+Method: Player turn
+(player_hand, deck)
+
+- display dealer hand
+- display player hand
+- ask whether to hit or stay
+  - if hit:
+    - deal card
+      - if value of hand is over 21, 
+        - bust! dealer wins
+  - otherwise, update player hand display
+  - restart loop. break if bust or stay
+
+-------------------------------------------
+
+Here's a tricky one-- how to map values for cards?
+Creating another hash constant for values seems like the way to go, but what about aces? 
+Can I create a conditional within my hash?
+
+- in CARD_VALUES, 'Ace' will be set to 11
+- during play, if an ace is dealt and would cause a bust, 10 is subtracted from hand_total.
